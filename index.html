@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and Drop</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 class="main-title">My Trello</h1>
+
+    <div class="drag-container">
+        <ul class="drag-list">
+            <!-- Backlog column -->
+            <li class="drag-column backlog-column">
+                <span class="header">
+                    <h1>Backlog</h1>
+                </span>
+                <div class="custom-scroll" id="baclog-content">
+                    <ul class="drag-item-list" id="backlog-list">
+                        <li class="drag-item">Testing</li>
+                        <li class="drag-item">Testing</li>
+                        <li class="drag-item">Testing</li>
+                        <li class="drag-item">Testing</li>
+                    </ul>
+                </div>
+                <!-- Add Group -->
+                <div class="add-btn-group">
+                    <div class="add-btn">
+                        <span class="plus-sign">+</span>
+                        <span>Add Item</span>
+                    </div>
+                    <div class="add-btn solid">
+                        <span>Save Item</span>
+                    </div>
+                    <div class="add-container">
+                        <div class="add-item"></div>
+                    </div>
+                </div>
+
+            </li>
+            
+            <!-- Progress column -->
+            <li class="drag-column progress-column">
+                <span class="header">
+                    <h1>Progress</h1>
+                </span>
+                <div class="custom-scroll" id="progress-content">
+                    <ul class="drag-item-list" id="progress-list">
+                        <li class="drag-item">Testing</li>
+                        <li class="drag-item">Testing</li>
+                        <li class="drag-item">Testing</li>
+                        <li class="drag-item">Testing</li>
+                    </ul>
+                </div>
+                <!-- Add Group -->
+                <div class="add-btn-group">
+                    <div class="add-btn">
+                        <span class="plus-sign">+</span>
+                        <span>Add Item</span>
+                    </div>
+                    <div class="add-btn solid">
+                        <span>Save Item</span>
+                    </div>
+                    <div class="add-container">
+                        <div class="add-item"></div>
+                    </div>
+                </div>
+
+            </li>
+
+            <!-- Completed column -->
+            <li class="drag-column complete-column">
+                <span class="header">
+                    <h1>Complete</h1>
+                </span>
+                <div class="custom-scroll" id="complete-content">
+                    <ul class="drag-item-list" id="complete-list">
+                        <li class="drag-item">Testing</li>
+                        <li class="drag-item">Testing</li>
+                        <li class="drag-item">Testing</li>
+                        <li class="drag-item">Testing</li>
+                    </ul>
+                </div>
+                <!-- Add Group -->
+                <div class="add-btn-group">
+                    <div class="add-btn">
+                        <span class="plus-sign">+</span>
+                        <span>Add Item</span>
+                    </div>
+                    <div class="add-btn solid">
+                        <span>Save Item</span>
+                    </div>
+                    <div class="add-container">
+                        <div class="add-item"></div>
+                    </div>
+                </div>
+
+            </li>
+
+            <!-- On-Hold column -->
+            <li class="drag-column on-hold-column">
+                <span class="header">
+                    <h1>On-Hold</h1>
+                </span>
+                <div class="custom-scroll" id="on-hold-content">
+                    <ul class="drag-item-list" id="on-hold-list">
+                        <li class="drag-item">Testing</li>
+                        <li class="drag-item">Testing</li>
+                        <li class="drag-item">Testing</li>
+                        <li class="drag-item">Testing</li>
+                        <li class="drag-item">Testing Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda ipsam itaque accusantium officia consectetur qui expedita, doloremque officiis porro ex distinctio nemo quam et excepturi non neque debitis repellendus veniam. Lorem Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis consequuntur officia debitis vel reiciendis. Nihil eaque possimus facere molestiae in iure fuga perferendis laboriosam molestias porro, iusto eligendi quaerat aspernatur. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae, labore laborum? Accusantium, rerum consequatur modi cupiditate commodi quos libero eum aut ducimus minima ipsa dicta totam est at? Laboriosam, quae. Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis eligendi modi ad inventore labore facere a necessitatibus non quis, adipisci doloremque rem placeat omnis nemo veritatis? Doloribus ratione voluptate distinctio.</li>
+                    </ul>
+                </div>
+                <!-- Add Group -->
+                <div class="add-btn-group">
+                    <div class="add-btn">
+                        <span class="plus-sign">+</span>
+                        <span>Add Item</span>
+                    </div>
+                    <div class="add-btn solid">
+                        <span>Save Item</span>
+                    </div>
+                    <div class="add-container">
+                        <div class="add-item"></div>
+                    </div>
+                </div>
+
+            </li>
+        </ul>
+    </div>
+
+
+    <!-- Script -->
+    <script src="script.js"></script>
+</body>
+</html>
