@@ -22,6 +22,7 @@ let listArrays = [];
 //Global Values To Store the DraggedItem, and Column Number
 let updatedOnLoad = false;
 let draggedItem;
+let dragging = false;
 let currentColumn;
 
 // Get Arrays from localStorage if any present, or set Default
@@ -59,49 +60,80 @@ function createItemEl(columnEl, column, item, index) {
   listEl.textContent = item;
   listEl.draggable = true;
   listEl.setAttribute("onDragStart", 'drag(event)');
+  listEl.contentEditable=true;
+
+  listEl.id = index;
+  listEl.setAttribute('onfocusout', `updateItem(${index}, ${column})`);
 
   columnEl.appendChild(listEl)
 
 }
+// Remove empty or null value
+function filterArray(array){
+  const filter = array.filter(item=> item!==null)
+  return filter
+}
 
 // Update Column - Rest Html, Update LocalStorage
 function updateDOM(){
-
   if (!updatedOnLoad){
     getSavedColumns();
   }
-
   //Fill All the Column
-
   //Backlog
   backlogList.textContent = '';
   backlogListArray.forEach((backlogItem, index)=>{
     createItemEl(backlogList, 0, backlogItem, index);
   });
+  backlogListArray = filterArray(backlogListArray)
+
   //Progress
   progressList.textContent = '';
   progressListArray.forEach((backlogItem, index)=>{
     createItemEl(progressList, 1, backlogItem, index);
   });
+  progressListArray = filterArray(progressListArray)
+
   //Complete
   completeList.textContent = '';
   completeListArray.forEach((completeItem, index)=>{
     createItemEl(completeList, 2, completeItem, index);
   });
+  completeListArray = filterArray(completeListArray)
+
   // On Hold
   onHoldList.textContent = '';
   onHoldListArray.forEach((onHoldItem, index)=>{
     createItemEl(onHoldList, 3, onHoldItem, index);
   });
+onHoldListArray = filterArray(onHoldListArray)
 
+//Run getSavedColumns only once, Update local Storage
+updatedOnLoad = true;
+updateSavedColumns()
+}
+
+// Delete Item - Delete if necessary, or update Array
+function updateItem(id, column){
+  const selectedArray = listArrays[column];
+  // console.log(selectedArray);
+  const selectedColumnEl = listColumns[column].children;
+  // console.log(selectedColumnEl[id].textContent);
+  if(!dragging){
+    if (!selectedColumnEl[id].textContent)
+      delete selectedArray[id]
+  else
+      selectedArray[id] = selectedColumnEl[id].textContent
+  updateDOM()
+  }
 
 }
 
 //Draging Task
-
 function drag(event){
   draggedItem = event.target;
-  console.log('dragged', draggedItem);
+  dragging = true;
+
 }
 
 // Allow Drop Element Into Another Element
@@ -125,10 +157,61 @@ function drop(event){
   });
 
   //Add Item to Column
-  const parent = listColumns[currentColumn]
-  parent.appendChild(draggedItem)
+  const parent = listColumns[currentColumn];
+  parent.appendChild(draggedItem);
+  
+  dragging = false; //dragging comlete
+  rebuildArray();
 }
 
+// Add to Cloumn list, and Reset Text box
+function addToColumn(column){
 
+  const itemText = addItems[column].textContent;
+  if (itemText){
+    const selectedArray = listArrays[column];
+    selectedArray.push(itemText);
+    addItems[column].textContent="";
+    updateDOM()
+  }
+  
+}
+
+//Show Add Item Input Box
+function showInputBox(column){
+  addBtns[column].style.visibility = 'hidden';
+  saveItemBtns[column].style.display = 'flex';
+  addItemContainers[column].style.display= 'flex';
+}
+
+//Hide Item Input Box
+function hideInputBox(column){
+  addBtns[column].style.visibility = 'visible';
+  saveItemBtns[column].style.display = 'none';
+  addItemContainers[column].style.display= 'none';
+  addToColumn(column);
+}
+
+//  Allow Array to Reflect Darg and Drop items
+function rebuildArray(){
+  backlogListArray = [];
+  progressListArray = [];
+  completeListArray = [];
+  onHoldListArray = [];
+
+  pushList(backlogListArray, backlogList);
+  pushList(progressListArray, progressList);
+  pushList(completeListArray, completeList);
+  pushList(onHoldListArray, onHoldList);
+
+  updateDOM();
+
+}
+//Fill Arrays
+function pushList(arrayList, listEl){
+  for (let i = 0; i < listEl.children.length; i++) {
+    arrayList.push(listEl.children[i].textContent);
+  }
+}
 
 updateDOM()
